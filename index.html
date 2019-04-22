@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trivia</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto" rel="stylesheet">
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
+    <!-- Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+<style>
+body { 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+h1,
+h2,
+h3 {
+    color: black;
+    padding: 25px;
+    text-shadow: 2px 2px red;
+}
+
+.answer,
+#timer {
+    font-weight: 900;
+}
+
+#start {
+    color: black;
+}
+
+.choices {
+    text-align: center;
+    border: groove 2px black;
+    border-radius: 5%;
+    margin: 0 35%;
+}
+
+.choices:hover {
+    background-color: red;
+    color: white;
+	cursor:pointer;
+}
+
+#QuizArea {
+    -webkit-box-shadow: 7px 5px 47px 0px rgba(255,0,0,0.76);
+    -moz-box-shadow: 7px 5px 47px 0px rgba(255,0,0,0.76);
+    box-shadow: 7px 5px 47px 0px rgba(255,0,0,0.76);
+}
+
+.shadow {
+    -webkit-box-shadow: -7px 6px 5px -1px rgba(255,0,0,0.79);
+    -moz-box-shadow: -7px 6px 5px -1px rgba(255,0,0,0.79);
+    box-shadow: -7px 6px 5px -1px rgba(255,0,0,0.79);
+}
+</style>
+	
+</head>
+<body>
+
+    <div class="container">
+
+    <h1 id="topText">Are You an Old School Gamer? </h1>
+	<h5>Let's take a trip back to the old school video game world!</h5>
+	<p>Test Your knowledge!</p>
+    <div class="jumbotron text-center" id="QuizArea">
+        <h1 id="start">START</h1>
+    </div>
+
+    <h2 id="bottomText" class="text-right">Lets Play!</h2>
+
+    </div>
+
+<script>
+
+$(document).ready(function() {
+    // question & answer array
+   var questions = [
+     {
+      question: "What was the first video game coding language?",
+      choices: ["Bandai - Code", "Konami - Code", "God - Code", "Comodore - Code"],
+      correctAnswer: "Konami - Code",
+      image: "picture"
+    }, 
+    {
+      question: "Who is the villian in the Legend of Zelda Series?",
+      choices: ["Bowser", "Wario", "Ganondorf", "Boo"],
+      correctAnswer: "Ganondorf",
+      image: "picture"
+    }, 
+    {
+      question: "What year was the NES released in the US?",
+      choices: ["1984", "1985", "1986", "1988"],
+      correctAnswer: "1985",
+      image: "picture"
+    },
+    {
+      question: "How many Ninja Gaiden games are there currently?",
+      choices: ["1", "2", "4", "5"],
+      correctAnswer: "4",
+      image: "picture"
+    }, 
+    {
+      question: "Which Mario Bro. game was the first to use 'save place' format in the game?",
+      choices: ["Super Mario Bros", "1", "2", "3"],
+      correctAnswer: "3",
+      image: "picture"
+    },
+    {
+      question: "How many worlds are in the Origional Mario Bros.?",
+      choices: ["5", "8", "10", "15"],
+      correctAnswer: "8",
+      image: "picture"
+    }, 
+    {
+      question: "Which Nintendo system has MarioTennis",
+      choices: ["NES", "SNES", "N64", "Nintendo Switch"],
+      correctAnswer: "N64",
+      image: "picture"
+    },
+    {
+      question: "Which Nintendo system has MarioTennis",
+      choices: ["NES", "SNES", "N64", "Nintendo Switch"],
+      correctAnswer: "N64",
+      image: "picture"
+    },
+    {
+      question: "What year was the first Kirby game released ?",
+      choices: ["1990", "1992", "1993", "1995"],
+      correctAnswer: "1992",
+      image: "picture"
+    }];
+    
+var questionCounter = 0; // track which question we are on
+var time = 15;     // initial time of 15 seconds for each question
+var correctGuesses = 0; // will keep tally of right guesses for end game
+var incorrectGuesses = 0; //will keep tally of wrong guesses for end game
+  // create question contents according to question count
+function displayQuestion() {
+	var question='', choice='', choices='', i=0;
+	question = questions[questionCounter].question;
+	choiceArray = questions[questionCounter].choices;
+	 //console.log(choiceArray);
+	for (var i in choiceArray){
+		  choice = questions[questionCounter].choices[i];
+		  choices += "<p class='choices'>" + choice + "</p>";
+	}
+  $("#QuizArea").append("<p><strong>" +  question + "</strong></p>" + choices );
+}
+  // user guessed correctly
+function userWin() {
+    $("#QuizArea").html("<p>HUZZAH! </p>");
+    correctGuesses++;
+    var correctAnswer = questions[questionCounter].correctAnswer;
+    $("#QuizArea").append("<p>Correct Answer: <span class='answer'>" + correctAnswer + "</span></p>" + questions[questionCounter].image);
+    setTimeout(nextQuestion, 4000);
+    questionCounter++;
+}
+
+  // user guessed incorrectly
+function userLoss() {
+    $("#QuizArea").html("<p>NERP!</p>");
+    incorrectGuesses++;
+    var correctAnswer = questions[questionCounter].correctAnswer;
+    $("#QuizArea").append("<p>Correct Answer: <span class='answer'>" + correctAnswer + "</span></p>" + questions[questionCounter].image);
+    setTimeout(nextQuestion, 4000);
+    questionCounter++;
+}
+
+  // user ran out of time
+function userTimeout() {
+    if (time === 0) {
+      $("#QuizArea").html("<p>Times Up!</p>");
+      incorrectGuesses++;
+      var correctAnswer = questions[questionCounter].correctAnswer;
+      $("#QuizArea").append("<p>Correct Answer: <span class='answer'>" + correctAnswer + "</span></p>" + questions[questionCounter].image);
+      setTimeout(nextQuestion, 4000);
+      questionCounter++;
+    }
+}
+  // screen that shows final score and nice message :)
+function gameOverDisplay() {
+    if (correctGuesses === questions.length) {
+      var endMessage = "Perfection! Might want to go outside more tho";
+      var bottomText = "#nerdalert!";
+    }
+    else if (correctGuesses > incorrectGuesses) {
+      var endMessage = "Good work! But do better you can...";
+      var bottomText = "all your base are belong to us";
+    }
+    else {
+      var endMessage = "You seem to have taken an arrow to the knee";
+      var bottomText = "#scrub";
+    }
+    $("#QuizArea").html("<p>" + endMessage + "</p>" + "<p><strong>Your Score: " + correctGuesses + " / " + incorrectGuesses + "</strong> </p>");
+    $("#QuizArea").append("<h1 id='start'>Play Again?</h1>");
+    $("#bottomText").html(bottomText);
+    gameReset();
+    $("#start").click(nextQuestion);
+  }
+
+  // game clock currently set to 15 seconds
+  function timer() {
+    clock = setInterval(countDown, 1000);
+    function countDown() {
+      if (time < 1) {
+        clearInterval(clock);
+        userTimeout();
+      }
+      if (time > 0) {
+        time--;
+      }
+      $("#timer").html("<strong>" + time + "</strong>");
+    }
+  }
+
+  // moves question counter forward to show next question
+ function nextQuestion() {
+    if (questionCounter < questions.length) {
+      time = 15;
+      $("#QuizArea").html("<p>Timer: <span id='timer'>" + time + "</span> ");
+      displayQuestion();
+      timer();
+      userTimeout();
+    }
+    else {
+      gameOverDisplay();
+    }
+  // console.log(questionCounter);
+  // console.log(questions[questionCounter].correctAnswer);
+ }
+// reset score and counter parameters on restart
+  function gameReset() {
+    questionCounter = 0;
+    correctGuesses = 0;
+    incorrectGuesses = 0;
+  }
+
+function startGame() {
+      $("#QuizArea").html("<p>Timer: <span id='timer'>" + time + "</span> ");
+      $("#start").hide();
+      // $("#QuizArea").append("<div id='question'>");
+      // var nextQuestion = displayQuestion(questionCounter);
+      // $("#QuizArea").append(nextQuestion);
+    // $("#QuizArea").append("<p>" + questions[questionCounter].question + "</p><p>" + questions[questionCounter].choices[0] + "</p><p>" + questions[questionCounter].choices[1] + "</p><p>" + questions[questionCounter].choices[2] + "</p><p>" + questions[questionCounter].choices[3] + "</p>");
+    // questionCounter++;
+    displayQuestion();
+    timer();
+    userTimeout();
+}
+
+// this starts the game
+$("#start").click(nextQuestion);
+
+    // click function to trigger right or wrong screen
+$("#QuizArea").on("click", ".choices", (function() {
+    var userGuess = $(this).text();
+    if (userGuess === questions[questionCounter].correctAnswer) {
+      clearInterval(clock);
+      userWin();
+    }
+    else {
+      clearInterval(clock);
+      userLoss();
+    }
+  }));
+});
+</script>
+
+</body>
+</html>
