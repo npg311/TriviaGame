@@ -11,7 +11,7 @@ h2,
 h3 {
     color: black;
     padding: 25px;
-    text-shadow: 2px 2px red;
+    text-shadow: 2px 2px blue;
 }
 
 .answer,
@@ -31,19 +31,19 @@ h3 {
 }
 
 .choices:hover {
-    background-color: red;
-    color: white;
+    background-color: greenyellow;
+    color: black;
 	cursor:pointer;
 }
 
 #QuizArea {
-    -webkit-box-shadow: 7px 5px 47px 0px rgba(255,0,0,0.76);
-    -moz-box-shadow: 7px 5px 47px 0px rgba(255,0,0,0.76);
-    box-shadow: 7px 5px 47px 0px rgba(255,0,0,0.76);
+    -webkit-box-shadow: 7px 5px 47px 0px blue;
+    -moz-box-shadow: 7px 5px 47px 0px blue;
+    box-shadow: 7px 5px 47px 0px blue;
 }
 
 .shadow {
-    -webkit-box-shadow: -7px 6px 5px -1px rgba(255,0,0,0.79);
-    -moz-box-shadow: -7px 6px 5px -1px rgba(255,0,0,0.79);
-    box-shadow: -7px 6px 5px -1px rgba(255,0,0,0.79);
+    -webkit-box-shadow: -7px 6px 5px -1px blue;
+    -moz-box-shadow: -7px 6px 5px -1px blue;
+    box-shadow: -7px 6px 5px -1px blue;
 }

@@ -51,8 +51,8 @@ $(document).ready(function() {
     },
     {
       question: "which Legend of Zelda game has sold the most copies of all time world wide?",
-      choices: ["Links Awakening", "A Link to the Past", "Ocharania of Time", "Majora's Mask"],
-      correctAnswer: "Ocharania of Time",
+      choices: ["Links Awakening", "A Link to the Past", "Ocarina of Time", "Majora's Mask"],
+      correctAnswer: "Ocarina of Time",
       image: "picture"
     },
     {
@@ -119,7 +119,7 @@ function gameOverDisplay() {
     }
     else if (correctGuesses > incorrectGuesses) {
       var endMessage = "Good work! But do better you can...";
-      var bottomText = "all your base are belong to us";
+      var bottomText = "We think you may possibly be the chosen 'one'";
     }
     else {
       var endMessage = "You seem to have taken an arrow to the knee";
